@@ -1,0 +1,10 @@
+.error {
+    color: red;
+}
+
+.errorblock {
+    color: #000;
+    background-color: #ffeeee;
+    border: 3px solid red;
+    margin: 16px;
+}
