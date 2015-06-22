@@ -5,6 +5,21 @@
 <body>
 <div class="container">
     <jsp:include page="WEB-INF/pageHeader.jsp"/>
+
+    <div class="row">
+        <div class="col-md-12">
+            <ul>
+                <li>
+                    <a href="greeting.html">Greeting</a>
+                </li>
+                <li>
+                    <a href="params/.html">Params</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="panel">
