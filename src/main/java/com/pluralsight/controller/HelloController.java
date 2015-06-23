@@ -2,11 +2,10 @@ package com.pluralsight.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.MatrixVariable;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.LastModified;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -39,6 +38,17 @@ public class HelloController implements LastModified { //todo LastModified not w
         model.addAttribute("matrixVariables", matrixVariables);
 
         return "params";
+    }
+
+    @RequestMapping(value = "/redirect/{redirectValue}", method = RequestMethod.GET)
+    public String redirectAttributeTest(@ModelAttribute("redirectValue") @PathVariable("redirectValue") String redirectValue, RedirectAttributesModelMap redirectAttributes){
+        redirectAttributes.addAttribute("redirectValue", redirectValue);
+        return "redirect:/redirected.html";
+    }
+
+    @RequestMapping(value = "redirected", method = RequestMethod.GET)
+    public String redirected(@ModelAttribute("redirectValue") String redirectValue){
+        return "redirected";
     }
 
 

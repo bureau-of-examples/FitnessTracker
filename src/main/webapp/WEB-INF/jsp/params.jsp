@@ -12,17 +12,27 @@
     <title></title>
 </head>
 <body>
-       <p>The id is: [${id}]</p>
-<p>You are using [${userAgent}]</p>
+<p>The id is: [${id}]</p>
+<c:if test="${not empty(userAgent)}">
+    <p>You are using [${userAgent}]</p>
+</c:if>
 
+<c:if test="${not empty(matrixVariables)}">
 <div>
     <h4>Matrix variables</h4>
     <table style="border: 1px solid black">
-        <tr><td>Variable</td><td>Value</td></tr>
-        <c:forEach items="${matrixVariables}" var="entry" >
-            <tr><td>${entry.key}</td><td>${entry.value}</td></tr>
+        <tr>
+            <td>Variable</td>
+            <td>Value</td>
+        </tr>
+        <c:forEach items="${matrixVariables}" var="entry">
+            <tr>
+                <td>${entry.key}</td>
+                <td>${entry.value}</td>
+            </tr>
         </c:forEach>
     </table>
 </div>
+</c:if>
 </body>
 </html>

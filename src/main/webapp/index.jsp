@@ -15,6 +15,12 @@
                 <li>
                     <a href="params/.html">Params</a>
                 </li>
+                <li>
+                    <a href="redirect/my_value.html">Redirect Test</a>
+                </li>
+                <li>
+                    <a href="params/111;p=111;q=222/matrix.html">Matrix Test</a>
+                </li>
 
             </ul>
         </div>
