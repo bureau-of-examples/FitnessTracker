@@ -29,6 +29,11 @@
 
     <servlet-mapping>
         <servlet-name>ft_servlet</servlet-name>
+        <url-pattern>/params/**</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ft_servlet</servlet-name>
         <url-pattern>*.json</url-pattern>
     </servlet-mapping>
 

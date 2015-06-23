@@ -55,7 +55,8 @@
         <property name="order" value="2" />
     </bean>
 
-    <mvc:annotation-driven />
+    <mvc:annotation-driven enable-matrix-variables="true" />
+
     <!--if request maps this url pattern then use the static files at these locations as response-->
     <!--pdf files in WEB-INF folder won't be served-->
     <mvc:resources mapping="/pdf/**" location="/WEB-INF/pdf/,/pdf/" />
@@ -76,5 +77,10 @@
             <property name="paramName" value="language" />
         </bean>
     </mvc:interceptors>
+
+    <!--enable path matrix variable-->
+    <bean id="handlerMapping" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+        <property name="removeSemicolonContent" value="false" />
+    </bean>
 
 </beans>
