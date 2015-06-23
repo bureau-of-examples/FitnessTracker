@@ -10,7 +10,7 @@
         <div class="col-md-12">
             <ul>
                 <li>
-                    <a href="greeting.html">Greeting</a>
+                    <a href="sayHello.html">Greeting</a>
                 </li>
                 <li>
                     <a href="params/.html">Params</a>

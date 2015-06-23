@@ -13,6 +13,7 @@
 </head>
 <body>
 <p>The id is: [${id}]</p>
+<p>JSESSIONID: ${JSESSIONID}</p>
 <c:if test="${not empty(userAgent)}">
     <p>You are using [${userAgent}]</p>
 </c:if>
