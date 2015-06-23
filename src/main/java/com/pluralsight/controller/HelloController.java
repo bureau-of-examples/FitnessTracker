@@ -2,6 +2,7 @@ package com.pluralsight.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.LastModified;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -17,7 +18,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping
-public class HelloController implements LastModified { //todo LastModified not working
+public class HelloController { //todo LastModified not working
 
     private static final String TEXT_ENCODING = "UTF-8";
 
@@ -70,14 +71,6 @@ public class HelloController implements LastModified { //todo LastModified not w
         return "redirected";
     }
 
-
-
-
-    public long getLastModified(HttpServletRequest httpServletRequest) {
-        Date now = new Date();
-        now.setSeconds(0);
-        return now.getTime();
-    }
 
 
 }
