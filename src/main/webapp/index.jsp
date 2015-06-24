@@ -10,6 +10,9 @@
         <div class="col-md-12">
             <ul>
                 <li>
+                    <a href="cache.html">Cache</a>
+                </li>
+                <li>
                     <a href="sayHello.html">Greeting</a>
                 </li>
                 <li>

@@ -20,7 +20,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
@@ -100,6 +102,15 @@ public class HelloController {
         model.addAttribute("now", LocalDateTime.now());
 
         return "lastModified";
+    }
+
+    @RequestMapping(value = "cache", method = RequestMethod.GET)
+    public String cacheTest(Model model, HttpServletResponse response){
+        model.addAttribute("now", LocalDateTime.now());
+        response.setHeader("Cache-Control", "private, max-age=60");
+        response.setDateHeader("Expires", LocalDateTime.now().plusMinutes(1).atZone(ZoneId.of("GMT")).toInstant().toEpochMilli());
+        response.setHeader("Pragma", "");
+        return "cache";
     }
 
 
