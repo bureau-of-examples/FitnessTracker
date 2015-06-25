@@ -1,18 +1,16 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ZHY
-  Date: 10/06/2015
-  Time: 10:24 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<t:page pageTitle="Greetings!">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <h3>Greetings rendered in hello.jsp view -</h3>
 
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<h1>hello.jsp view</h1>
-  <h1>${greeting}</h1>
-</body>
-</html>
+            <h3><em>${greeting}</em></h3>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <a href="${pageContext.request.contextPath}/">Go back</a>
+        </div>
+    </div>
+</t:page>

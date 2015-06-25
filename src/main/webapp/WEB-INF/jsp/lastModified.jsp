@@ -1,17 +1,18 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: JOHNZ
-  Date: 24/06/2015
-  Time: 11:16 AM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-          <div>Last modified at ${modifiedTime}</div>
-          <div>Now is ${now}</div>
-</body>
-</html>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<t:page pageTitle="Last Modified Test">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div>Last modified at ${modifiedTime}</div>
+            <div>Now is ${now}</div>
+
+            <br>
+            <a href="?">Normal Get (304 not modified)</a> | <a href="?update=true">Refresh page content</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <a href="${pageContext.request.contextPath}/">Go back</a>
+        </div>
+    </div>
+</t:page>

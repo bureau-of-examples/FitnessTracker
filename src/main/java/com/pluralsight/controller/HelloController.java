@@ -1,31 +1,21 @@
 package com.pluralsight.controller;
 
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.LastModified;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 import org.springframework.web.util.HtmlUtils;
 import org.springframework.web.util.UriUtils;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
+import java.util.TimeZone;
 
 @Controller
 @RequestMapping
@@ -86,29 +76,29 @@ public class HelloController {
     @RequestMapping(value = "lastModified", method = RequestMethod.GET)
     public String lastModifiedTest(WebRequest request, HttpSession session, @RequestParam(required = false) String update, Model model, final HttpServletResponse response){
 
-        LocalDateTime modifiedTime = (LocalDateTime)session.getAttribute("modifiedTime");
+        Date modifiedTime = (Date)session.getAttribute("modifiedTime");
 
         if(modifiedTime == null || !StringUtils.isEmpty(update)){
-            modifiedTime = LocalDateTime.now();
+            modifiedTime = new Date();
         }
 
         response.setHeader("Cache-Control", "max-age=3600");
 
-        if(request.checkNotModified(Timestamp.valueOf(modifiedTime).getTime())) {
+        if(request.checkNotModified(modifiedTime.getTime())) {
             return null;
         }
 
         model.addAttribute("modifiedTime", modifiedTime);
-        model.addAttribute("now", LocalDateTime.now());
+        model.addAttribute("now", new Date());
 
         return "lastModified";
     }
 
     @RequestMapping(value = "cache", method = RequestMethod.GET)
     public String cacheTest(Model model, HttpServletResponse response){
-        model.addAttribute("now", LocalDateTime.now());
+        model.addAttribute("now", new Date());
         response.setHeader("Cache-Control", "private, max-age=60");
-        response.setDateHeader("Expires", LocalDateTime.now().plusMinutes(1).atZone(ZoneId.of("GMT")).toInstant().toEpochMilli());
+        response.setDateHeader("Expires",  Calendar.getInstance(TimeZone.getTimeZone("GMT")).getTime().getTime());
         response.setHeader("Pragma", "");
         return "cache";
     }

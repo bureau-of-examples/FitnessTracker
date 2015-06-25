@@ -8,13 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<html>
-<head>
-    <title>Add Minutes</title>
-    <link rel="stylesheet" href='${pageContext.request.contextPath}/css/bootstrap.css'>
-    <link rel="stylesheet" href='${pageContext.request.contextPath}/css/site.css'>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<t:page pageTitle="Add Minutes" useJQuery="true">
 
-    <script type="text/javascript" src="/js/jquery.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $.getJSON(
@@ -33,18 +29,13 @@
             )
         });
     </script>
-</head>
-<body>
-
-<div class="container">
-    <jsp:include page="../pageHeader.jsp"/>
 
     <div class="row">
         <div class="col-md-offset-8 col-md-4"> Language: <a href="?language=en">English</a> | <a href="?language=es">Spanish</a>
         </div>
     </div>
     <div class="row">
-        <%--<div class="col-md-8">${controllerHash}</div>--%>
+            <%--<div class="col-md-8">${controllerHash}</div>--%>
         <div class="col-md-12">${action}</div>
     </div>
 
@@ -71,10 +62,8 @@
     </div>
     <div class="row">
         <h3>Your goal is: ${goal.minutes} minutes.</h3>
+
         <h3>You exercised ${totalMinutes} minutes.</h3>
         <a href="../">Back to default page.</a>
     </div>
-
-</div>
-</body>
-</html>
+</t:page>

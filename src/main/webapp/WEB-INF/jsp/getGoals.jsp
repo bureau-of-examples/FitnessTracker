@@ -7,48 +7,51 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<t:page pageTitle="My Goals">
 
-<html>
-<head>
-    <title>Goals Report</title>
-    <link rel="stylesheet" href='${pageContext.request.contextPath}/css/bootstrap.css'>
-</head>
-<body>
-<div class="container">
-    <jsp:include page="../pageHeader.jsp"/>
-
-    <div class="well-lg">
-        <div class="row" style=" font-weight: 400">
-            <div class="col-md-4">Id</div>
-            <div class="col-md-8">Minutes</div>
-        </div>
-
-        <div>
-            <c:forEach items="${goals}" var="goal">
-                <div class="row">
-                    <div class="col-md-4">${goal.id}</div>
-                    <div class="col-md-8">${goal.minutes}</div>
-
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well-lg">
+                <div class="row" style=" font-weight: 400">
+                    <div class="col-md-4">Id</div>
+                    <div class="col-md-8">Minutes</div>
                 </div>
-                <div class="row" style="border: 1px solid lightgray;">
-                    <div class="col-md-12">
-                        <div class="row" style="font-weight: 300">
-                            <div class="col-md-1">Id</div>
-                            <div class="col-md-2">Activity</div>
-                            <div class="col-md-9">Minutes</div>
+
+                <div>
+                    <c:forEach items="${goals}" var="goal">
+                        <div class="row">
+                            <div class="col-md-4">${goal.id}</div>
+                            <div class="col-md-8">${goal.minutes}</div>
+
                         </div>
-                        <c:forEach items="${goal.exercises}" var="exercise">
-                            <div class="row">
-                                <div class="col-md-1">${exercise.id}</div>
-                                <div class="col-md-2">${exercise.activity}</div>
-                                <div class="col-md-9">${exercise.minutes}</div>
+                        <div class="row" style="border: 1px solid lightgray;">
+                            <div class="col-md-12">
+                                <div class="row" style="font-weight: 300">
+                                    <div class="col-md-1">Id</div>
+                                    <div class="col-md-2">Activity</div>
+                                    <div class="col-md-9">Minutes</div>
+                                </div>
+                                <c:forEach items="${goal.exercises}" var="exercise">
+                                    <div class="row">
+                                        <div class="col-md-1">${exercise.id}</div>
+                                        <div class="col-md-2">${exercise.activity}</div>
+                                        <div class="col-md-9">${exercise.minutes}</div>
+                                    </div>
+                                </c:forEach>
                             </div>
-                        </c:forEach>
-                    </div>
+                        </div>
+                    </c:forEach>
                 </div>
-            </c:forEach>
+            </div>
         </div>
     </div>
-</div>
-</body>
-</html>
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <a href="${pageContext.request.contextPath}/">Go back</a>
+        </div>
+    </div>
+</t:page>
+
+
