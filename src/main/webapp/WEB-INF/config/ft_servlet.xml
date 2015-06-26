@@ -13,7 +13,7 @@
 
 
     <!--Controller beans must be defined here as they are not searched in the parent spring context-->
-    <context:component-scan base-package="com.pluralsight.controller" />
+    <context:component-scan base-package="com.pluralsight.controller,com.pluralsight.aop" />
 
     <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
         <property name="order" value="1" />
@@ -84,4 +84,7 @@
         <property name="removeSemicolonContent" value="false" />
     </bean>
 
+    <bean id="handlerAdapter" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="cacheSeconds" value="0" />
+    </bean>
 </beans>

@@ -44,6 +44,8 @@ public class GoalController {
     @RequestMapping(value = {"/addGoal", "/updateGoal"}, method = RequestMethod.POST)
     public String addGoal(@Valid @ModelAttribute("goal") Goal goal, BindingResult bindingResult){
         if(!bindingResult.hasErrors()){
+            if("Reserved".equals(goal.getDescription()))
+                throw new RuntimeException("Goal name cannot be 'Reserved.'");
             goalService.save(goal);
             return "redirect:addMinutes.html";
         }
