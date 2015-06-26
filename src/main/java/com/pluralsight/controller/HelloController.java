@@ -98,10 +98,9 @@ public class HelloController {
     public String cacheTest(Model model, HttpServletResponse response){
         model.addAttribute("now", new Date());
         response.setHeader("Cache-Control", "private, max-age=60");
-        response.setDateHeader("Expires",  Calendar.getInstance(TimeZone.getTimeZone("GMT")).getTime().getTime());
+        response.setDateHeader("Expires", Calendar.getInstance(TimeZone.getTimeZone("GMT")).getTime().getTime());
         response.setHeader("Pragma", "");
         return "cache";
     }
-
 
 }

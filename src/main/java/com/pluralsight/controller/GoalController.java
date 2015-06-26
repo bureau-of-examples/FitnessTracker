@@ -4,13 +4,12 @@ import com.pluralsight.model.Goal;
 import com.pluralsight.model.GoalReport;
 import com.pluralsight.service.GoalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -26,17 +25,23 @@ public class GoalController {
     @Autowired
     private GoalService goalService;
 
-    @RequestMapping(value = "/addGoal", method = {RequestMethod.GET})
-    public String addGoal(Model model){
+    @RequestMapping(value = "/updateGoal", method = {RequestMethod.GET})
+    public String updateGoal(Model model, @RequestParam(value = "create", required = false) Boolean create){
         Goal goal = (Goal)session.getAttribute("goal");
-        if(goal == null){
+        if(goal == null || Boolean.TRUE.equals(create)){
             goal = new Goal();
         }
         model.addAttribute("goal", goal);
         return "addGoal";
     }
 
-    @RequestMapping(value = "/addGoal", method = RequestMethod.POST)
+    @RequestMapping(value = "/addGoal", method = {RequestMethod.GET})
+    public String addGoal(Model model){
+
+        return "forward:updateGoal.html?create=true";
+    }
+
+    @RequestMapping(value = {"/addGoal", "/updateGoal"}, method = RequestMethod.POST)
     public String addGoal(@Valid @ModelAttribute("goal") Goal goal, BindingResult bindingResult){
         if(!bindingResult.hasErrors()){
             goalService.save(goal);
@@ -60,6 +65,12 @@ public class GoalController {
         model.addAttribute("goalReports", goalReports);
         return "getGoalReports";
     }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder){
+        binder.registerCustomEditor(String.class, new StringTrimmerEditor(" -", true));
+    }
+
 
 
 }

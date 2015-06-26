@@ -25,9 +25,10 @@
                     <h3>What would you like to do...</h3>
 
                     <div class="row">
-                        <div class="col-md-4"><a href="addGoal.html" class="btn btn-default">Add Goal</a></div>
-                        <div class="col-md-4"><a href="getGoals.html" class="btn btn-default">Get Goal</a></div>
-                        <div class="col-md-4"><a href="getGoalReports.html" class="btn btn-default">Get Goal Reports</a>
+                        <div class="col-md-3"><a href="addGoal.html" class="btn btn-default">Add Goal</a></div>
+                        <div class="col-md-3"><a href="updateGoal.html" class="btn btn-default">Update Goal</a></div>
+                        <div class="col-md-3"><a href="getGoals.html" class="btn btn-default">Get Goal</a></div>
+                        <div class="col-md-3"><a href="getGoalReports.html" class="btn btn-default">Get Goal Reports</a>
                         </div>
                     </div>
                 </div>
