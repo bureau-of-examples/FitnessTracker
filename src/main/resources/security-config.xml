@@ -15,7 +15,11 @@
         http://www.sprigframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
     <security:http auto-config="true">
+        <security:intercept-url pattern="/login.html" access="permitAll()" /><!--tthis has to be the first one-->
         <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+        <!--<security:http-basic />-->
+        <security:form-login login-page="/login.html" login-processing-url="/j_spring_security_check.html" username-parameter="j_username" password-parameter="j_password" />
+
     </security:http>
 
     <security:authentication-manager>
