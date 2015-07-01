@@ -41,6 +41,19 @@
                 <input type="reset" value="Reset" class="btn btn-default">
                 <sec:csrfInput />
             </form>
+
+            <hr>
+            <table class="table">
+                <caption>User list</caption>
+                <tr><th>Username</th><th>Password</th></tr>
+                <c:forEach items="${users}" var="user" >
+                    <tr>
+                        <td>${user.username}</td>
+                        <td>${user.password}</td>
+                    </tr>
+                </c:forEach>
+
+            </table>
         </div>
     </div>
 </t:page>

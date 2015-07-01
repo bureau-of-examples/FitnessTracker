@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
@@ -18,8 +20,15 @@ public class UserServiceImpl implements UserService {
         return userRepository.findOne(username);
     }
 
+    @Transactional
     @Override
     public User saveUser(User user) {
         return userRepository.save(user);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<User> findAllUsers() {
+        return userRepository.findAll();
     }
 }
