@@ -21,7 +21,7 @@ public class User {
 
     @Size(min = 4)
     @NotNull
-    @Column(length = 50, nullable = false)
+    @Column(length = 60, nullable = false)
     private String password;
 
     @NotNull

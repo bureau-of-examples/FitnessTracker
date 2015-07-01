@@ -15,13 +15,24 @@ public class DataInitializer {
 
     @PostConstruct
     public void initUser(){
-        User zhy2002 = userService.findUser("zhy2002");
-        if(zhy2002 == null){
-            zhy2002 = new User();
-            zhy2002.setUsername("zhy2002");
-            zhy2002.setPassword("zhy2002");
-            zhy2002.addAuthority("ROLE_USER");
-            userService.saveUser(zhy2002);
+        createUser("zhy2002","$2a$10$ioQQlFENVvWNjCYRNmm84utquF.oDWTjCuIi8SjnnrEwLNOQ1rQvC", "ROLE_USER");
+        createUser("zhy2003","$2a$10$0mze52oN2GymxKYXvtOv.usa3ms8G2iKKsVCd5GSluXiitDWNezBO", "ROLE_USER", "ROLE_ADMIN");
+    }
+
+    private void createUser(String username, String password, String... roles) {
+        User user = userService.findUser(username);
+        if(user != null){
+            return;
         }
+
+        user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        if(roles != null){
+            for (String role : roles)
+                user.addAuthority(role);
+        }
+        userService.saveUser(user);
+
     }
 }

@@ -1,9 +1,15 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <t:page pageTitle="Main Page">
 
     <div class="row">
         <div class="col-md-12">
             <div class="well bg-info">
+                <div class="pull-right">
+                    Welcome <sec:authentication property="name"/>!
+                </div>
+
                 <h3>Test pages</h3>
 
                 <div class="btn-group-justified" role="group">
@@ -13,6 +19,9 @@
                     <a class="btn btn-default" href="params/111;p=111;q=222/matrix.html">Matrix Variable</a>
                     <a class="btn btn-default" href="lastModified.html">Last Modified</a>
                     <a class="btn btn-default" href="cache.html">Cache</a>
+                    <sec:authorize access="hasRole('ROLE_ADMIN')" >
+                    <a class="btn btn-default" href="javascript:void(0)" >Admin</a>
+                    </sec:authorize>
                 </div>
             </div>
         </div>

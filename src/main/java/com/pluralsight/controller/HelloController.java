@@ -103,4 +103,9 @@ public class HelloController {
         return "cache";
     }
 
+    @RequestMapping(value = "index", method = RequestMethod.GET)
+    public String index(){
+        return "index";
+    }
+
 }
