@@ -1,6 +1,5 @@
 package com.pluralsight.controller;
 
-import com.pluralsight.repository.UserRepository;
 import com.pluralsight.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +18,19 @@ public class LoginController {
 
         model.addAttribute("users", userService.findAllUsers());
         return "login";
+    }
+
+    @RequestMapping(value = "/loginFailed", method = RequestMethod.GET)
+    public String loginFailed(Model model){
+
+        model.addAttribute("error", true);
+        return "forward:/login.html";
+    }
+
+    @RequestMapping(value = "/loggedOut", method = RequestMethod.GET)
+    public String loggedOut(){
+
+        return "loggedOut";
     }
 
 
