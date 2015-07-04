@@ -20,10 +20,12 @@
         <security:intercept-url pattern="/login.html" access="permitAll()" /><!--tthis has to be the first one-->
         <security:intercept-url pattern="/loginFailed.html" access="permitAll()" />
         <security:intercept-url pattern="/loggedOut.html" access="permitAll()" />
+        <security:intercept-url pattern="/403.html" access="permitAll()" />
         <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
         <!--<security:http-basic />-->
         <security:form-login login-page="/login.html" authentication-failure-url="/loginFailed.html" login-processing-url="/j_spring_security_check.html" username-parameter="j_username" password-parameter="j_password" />
         <security:logout logout-success-url="/loggedOut.html" logout-url="/logout.html" invalidate-session="true" />
+        <security:access-denied-handler error-page="/403.html" />
     </security:http>
 
     <security:authentication-manager>

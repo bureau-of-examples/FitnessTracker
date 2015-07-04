@@ -22,5 +22,8 @@ public class PasswordHashTest {
 
         hash = passwordEncoder.encode("zhy2003");
         System.out.println(hash);
+
+        hash = passwordEncoder.encode("zhy2004");
+        System.out.println(hash);
     }
 }

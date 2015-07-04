@@ -1,4 +1,4 @@
-package com.pluralsight.init;
+package com.pluralsight.startup;
 
 import com.pluralsight.model.security.User;
 import com.pluralsight.service.UserService;
@@ -17,6 +17,7 @@ public class DataInitializer {
     public void initUser(){
         createUser("zhy2002","$2a$10$ioQQlFENVvWNjCYRNmm84utquF.oDWTjCuIi8SjnnrEwLNOQ1rQvC", "ROLE_USER");
         createUser("zhy2003","$2a$10$0mze52oN2GymxKYXvtOv.usa3ms8G2iKKsVCd5GSluXiitDWNezBO", "ROLE_USER", "ROLE_ADMIN");
+        createUser("zhy2004","$2a$10$w.3X7DDGmnLfyDGCV1hrLekCdQNQZ9xj9fKcjycZoQlZAPAQWfuu2", "ROLE_NONE");
     }
 
     private void createUser(String username, String password, String... roles) {

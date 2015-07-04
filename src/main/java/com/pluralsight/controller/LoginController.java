@@ -33,6 +33,12 @@ public class LoginController {
         return "loggedOut";
     }
 
+    @RequestMapping(value = "403", method = RequestMethod.GET)
+    public String notAuthorized(){
+
+        return "403";
+    }
+
 
 
 }
