@@ -12,9 +12,9 @@
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/security
         http://www.springframework.org/schema/security/spring-security.xsd
-        http://www.sprigframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+        http://www.sprigframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-    <security:http auto-config="true">
+    <security:http auto-config="true" use-expressions="true">
         <security:intercept-url pattern="/css/**" access="permitAll()" />
         <security:intercept-url pattern="/js/**" access="permitAll()" />
         <security:intercept-url pattern="/login.html" access="permitAll()" /><!--tthis has to be the first one-->

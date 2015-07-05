@@ -3,9 +3,7 @@ package com.pluralsight.model.security;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Spring Security User.
@@ -30,6 +28,13 @@ public class User {
 
     @OneToMany(orphanRemoval = true, fetch = FetchType.EAGER, mappedBy = "owner", cascade = {CascadeType.ALL})
     private Set<Authority> authorities = new HashSet<>();
+
+    @CollectionTable(name = "user_permissions")
+    @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
+    @MapKeyClass(String.class)
+    @MapKeyColumn(nullable = false, length = 60)
+    @Column(length = 70)
+    private Map<String, String> permissions = new HashMap<>();
 
     public Authority addAuthority(String auth){
         Authority authority = new Authority();
@@ -78,6 +83,14 @@ public class User {
         this.authorities = authorities;
     }
 
+    public Map<String, String> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(Map<String, String> permissions) {
+        this.permissions = permissions;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -86,7 +99,6 @@ public class User {
         User user = (User) o;
 
         return username.equals(user.username);
-
     }
 
     @Override

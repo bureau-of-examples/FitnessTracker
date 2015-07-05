@@ -17,7 +17,11 @@ public class PasswordHashTest {
     @Test
     public void testBcrypt(){
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String hash = passwordEncoder.encode("zhy2002");
+
+        String hash = passwordEncoder.encode("zhy2001");
+        System.out.println(hash);
+
+        hash = passwordEncoder.encode("zhy2002");
         System.out.println(hash);
 
         hash = passwordEncoder.encode("zhy2003");
