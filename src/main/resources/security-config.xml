@@ -17,8 +17,9 @@
     <security:http auto-config="true" use-expressions="true">
         <security:intercept-url pattern="/css/**" access="permitAll()"  />
         <security:intercept-url pattern="/js/**" access="permitAll()" />
-        <security:intercept-url pattern="/login.html" access="permitAll()" requires-channel="https" /><!--will redirect http://.... to https://....-->
-        <security:intercept-url pattern="/loginFailed.html" access="permitAll()" requires-channel="https" />
+        <security:intercept-url pattern="/favicon.ico" access="permitAll()" />
+        <security:intercept-url pattern="/login.html" access="permitAll()"  /><!--requires-channel="https"  will redirect http://.... to https://....-->
+        <security:intercept-url pattern="/loginFailed.html" access="permitAll()" /> <!--requires-channel="https" -->
         <security:intercept-url pattern="/loggedOut.html" access="permitAll()" />
         <security:intercept-url pattern="/403.html" access="permitAll()" />
         <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')" /><!--tthis has to be the last one-->
