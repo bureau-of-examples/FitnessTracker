@@ -46,7 +46,12 @@ public class GoalController {
         if(!bindingResult.hasErrors()){
             if("Reserved".equals(goal.getDescription()))
                 throw new RuntimeException("Goal name cannot be 'Reserved.'");
+
+            boolean updating = goal.getId() != null;
             goalService.save(goal);
+
+            if(updating)
+                return "redirect:addMoreMinutes.html";
             return "redirect:addMinutes.html";
         }
 

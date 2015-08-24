@@ -36,7 +36,9 @@
     </div>
     <div class="row">
             <%--<div class="col-md-8">${controllerHash}</div>--%>
-        <div class="col-md-12">${action}</div>
+        <div class="col-md-12">
+            <h4>${action} <span>${goal.id} - ${goal.description}</span></h4>
+        </div>
     </div>
 
     <div class="row">

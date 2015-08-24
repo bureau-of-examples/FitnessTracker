@@ -3,6 +3,7 @@ package com.pluralsight.model;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,8 @@ public class Goal {
     @Range(min = 1, max = 130)
     private int minutes;
 
-    @Size(min = 0, max = 15)
+    @NotNull
+    @Size(min = 1, max = 15)
     private String description;
 
     @OneToMany(mappedBy = "goal", cascade = CascadeType.ALL/*, fetch = FetchType.EAGER*/)

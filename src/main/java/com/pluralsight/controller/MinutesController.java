@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
@@ -32,11 +32,16 @@ public class MinutesController {
     private HttpServletRequest request; //this is a proxy delegating to the real request object bind to the current thread
 
     @RequestMapping(value = "/addMinutes")
-    public String addMinutes(@ModelAttribute("exercise") Exercise exercise, Model model) {
+    public String addMinutes(@ModelAttribute("exercise") Exercise exercise, Model model, HttpSession session) {
         model.addAttribute("controllerHash", this.hashCode());
-        model.addAttribute("action", "Add Minutes:");
+        model.addAttribute("action", "Add Minutes to goal ");
+        Goal goal = (Goal) session.getAttribute("goal");
+        if(goal == null)
+            return "redirect:addGoal.html";
+        model.addAttribute("goal", goal);
 
         if (Objects.equals("GET", request.getMethod())) {
+            model.addAttribute("totalMinutes", "N/A");
             return "addMinutes";
         } else {
             return "forward:addMoreMinutes.html"; //goto addMoreMinutes action without going back to client
@@ -44,16 +49,20 @@ public class MinutesController {
         }
     }
 
-    @Autowired
+    @Resource(name = "exerciseRepository")
     private ExerciseRepository exerciseRepository;
 
     @RequestMapping(value = "/addMoreMinutes")
     public String addMoreMinutes(@ModelAttribute("exercise") Exercise exercise, Model model, HttpSession session, BindingResult bindingResult/*bindingResult is a set of validation errors */) {
         //model.addAttribute("controllerHash", this.hashCode());
         model.addAttribute("action", "Add More Minutes:");
+        Goal goal = (Goal) session.getAttribute("goal");
+        if(goal == null)
+            return "redirect:addGoal.html";
+        model.addAttribute("goal", goal);
 
         if (request.getMethod().equals("POST")) {
-            Goal goal = (Goal) session.getAttribute("goal");
+
             exercise.setGoal(goal);
 
             //we validate this way because @Valid produced a 400 error on this forwarded action method.

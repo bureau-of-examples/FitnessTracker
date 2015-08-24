@@ -1,5 +1,10 @@
 package com.pluralsight.controller;
 
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -20,14 +25,24 @@ import java.util.TimeZone;
 @Controller
 @RequestMapping
 @SessionAttributes("modifiedTime")
-public class HelloController {
+public class HelloController implements ApplicationContextAware {
 
     private static final String TEXT_ENCODING = "UTF-8";
+
+    private ApplicationContext applicationContext;
+
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+    }
 
     @RequestMapping(value = "/greeting", method = RequestMethod.GET)
     public String greeting(@RequestParam("name") String name, Model model) throws UnsupportedEncodingException{
 
-        model.addAttribute("greeting", "Hello " + HtmlUtils.htmlEscape(UriUtils.decode(name, TEXT_ENCODING)) +"! The time is " + new Date() + "!");
+        Object[] args = {HtmlUtils.htmlEscape(UriUtils.decode(name, TEXT_ENCODING)), new Date()};
+        String message = applicationContext.getMessage("hello.greating.message", args, LocaleContextHolder.getLocale());
+        model.addAttribute("greeting", message);
         return "hello";
     }
 

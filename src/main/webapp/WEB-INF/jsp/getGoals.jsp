@@ -21,7 +21,7 @@
                 <div>
                     <c:forEach items="${goals}" var="goal">
                         <div class="row">
-                            <div class="col-md-4">${goal.id}</div>
+                            <div class="col-md-4">${goal.id} - ${goal.description}</div>
                             <div class="col-md-8">${goal.minutes}</div>
 
                         </div>
