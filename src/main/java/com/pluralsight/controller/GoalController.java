@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
@@ -25,13 +26,15 @@ public class GoalController {
     @Autowired
     private GoalService goalService;
 
+    public static final String CURRENT_GOAL_SESSION_KEY = "goal";
+
     @RequestMapping(value = "/updateGoal", method = {RequestMethod.GET})
     public String updateGoal(Model model, @RequestParam(value = "create", required = false) Boolean create){
-        Goal goal = (Goal)session.getAttribute("goal");
+        Goal goal = (Goal)session.getAttribute(CURRENT_GOAL_SESSION_KEY);
         if(goal == null || Boolean.TRUE.equals(create)){
             goal = new Goal();
         }
-        model.addAttribute("goal", goal);
+        model.addAttribute(CURRENT_GOAL_SESSION_KEY, goal);
         return "addGoal";
     }
 
@@ -42,7 +45,7 @@ public class GoalController {
     }
 
     @RequestMapping(value = {"/addGoal", "/updateGoal"}, method = RequestMethod.POST)
-    public String addGoal(@Valid @ModelAttribute("goal") Goal goal, BindingResult bindingResult){
+    public String addGoal(@Valid @ModelAttribute(CURRENT_GOAL_SESSION_KEY) Goal goal, BindingResult bindingResult){
         if(!bindingResult.hasErrors()){
             if("Reserved".equals(goal.getDescription()))
                 throw new RuntimeException("Goal name cannot be 'Reserved.'");
@@ -56,6 +59,18 @@ public class GoalController {
         }
 
         return "addGoal";
+    }
+
+    @RequestMapping(value = "/setGoal", method = RequestMethod.POST)
+    public @ResponseBody String setGoal(@RequestParam(value = "goalId", required = true) long goalId, Model model){
+
+        Goal goal = goalService.getGoal(goalId);
+        if(goal == null)
+            throw new RuntimeException("Cannot find goal " + goalId);
+
+        model.addAttribute(CURRENT_GOAL_SESSION_KEY, goal);
+        return "success";
+
     }
 
     @RequestMapping(value = "/getGoals", method = RequestMethod.GET)

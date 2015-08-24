@@ -38,4 +38,9 @@ public class GoalRepositoryImpl implements GoalRepository {
         TypedQuery<GoalReport> query = entityManager.createNamedQuery(Goal.FIND_GOAL_REPORTS, GoalReport.class);
         return query.getResultList();
     }
+
+    @Override
+    public Goal get(long goalId){
+        return entityManager.find(Goal.class, goalId);
+    }
 }

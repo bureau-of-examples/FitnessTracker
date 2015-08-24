@@ -35,13 +35,12 @@ public class MinutesController {
     public String addMinutes(@ModelAttribute("exercise") Exercise exercise, Model model, HttpSession session) {
         model.addAttribute("controllerHash", this.hashCode());
         model.addAttribute("action", "Add Minutes to goal ");
-        Goal goal = (Goal) session.getAttribute("goal");
+        Goal goal = (Goal) session.getAttribute(GoalController.CURRENT_GOAL_SESSION_KEY);
         if(goal == null)
             return "redirect:addGoal.html";
-        model.addAttribute("goal", goal);
+        model.addAttribute(GoalController.CURRENT_GOAL_SESSION_KEY, goal);
 
         if (Objects.equals("GET", request.getMethod())) {
-            model.addAttribute("totalMinutes", "N/A");
             return "addMinutes";
         } else {
             return "forward:addMoreMinutes.html"; //goto addMoreMinutes action without going back to client
@@ -56,10 +55,10 @@ public class MinutesController {
     public String addMoreMinutes(@ModelAttribute("exercise") Exercise exercise, Model model, HttpSession session, BindingResult bindingResult/*bindingResult is a set of validation errors */) {
         //model.addAttribute("controllerHash", this.hashCode());
         model.addAttribute("action", "Add More Minutes:");
-        Goal goal = (Goal) session.getAttribute("goal");
+        Goal goal = (Goal) session.getAttribute(GoalController.CURRENT_GOAL_SESSION_KEY);
         if(goal == null)
             return "redirect:addGoal.html";
-        model.addAttribute("goal", goal);
+        model.addAttribute(GoalController.CURRENT_GOAL_SESSION_KEY, goal);
 
         if (request.getMethod().equals("POST")) {
 
@@ -72,10 +71,11 @@ public class MinutesController {
             if (!bindingResult.hasErrors()) {
                 exerciseService.save(exercise);
                 model.addAttribute("actionResult", "Minutes saved.");
-                Integer totalMinutes = exerciseRepository.findTotalMinutes(goal.getId());
-                model.addAttribute("totalMinutes", totalMinutes);
             }
         }
+
+        Integer totalMinutes = exerciseRepository.findTotalMinutes(goal.getId());
+        model.addAttribute("totalMinutes", totalMinutes);
 
         return "addMinutes";//view name will be resolved by InternalResourceViewResolver
     }

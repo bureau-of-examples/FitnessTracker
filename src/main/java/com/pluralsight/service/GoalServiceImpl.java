@@ -21,6 +21,11 @@ public class GoalServiceImpl implements GoalService{
     }
 
     @Transactional
+    public Goal getGoal(long goalId){
+        return goalRepository.get(goalId);
+    }
+
+    @Transactional
     public List<Goal> getAllGoals() {
         return goalRepository.loadAll();
     }

@@ -13,4 +13,6 @@ public interface GoalRepository {
     List<Goal> loadAll();
 
     List<GoalReport> findAllGoalReports();
+
+    Goal get(long goalId);
 }

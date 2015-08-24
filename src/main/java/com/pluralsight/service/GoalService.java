@@ -10,6 +10,8 @@ public interface GoalService {
 
     Goal save(Goal goal);
 
+    Goal getGoal(long goalId);
+
     List<Goal> getAllGoals();
 
     List<GoalReport> findAllGoalReports();

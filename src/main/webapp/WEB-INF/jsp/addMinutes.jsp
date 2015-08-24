@@ -9,7 +9,12 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <t:page pageTitle="Add Minutes" useJQuery="true">
+
+    <c:if test="${empty totalMinutes}">
+        <c:set var="totalMinutes" value="0" />
+    </c:if>
 
     <script type="text/javascript">
         $(document).ready(function () {
