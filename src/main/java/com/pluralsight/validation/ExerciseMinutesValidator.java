@@ -22,6 +22,10 @@ public class ExerciseMinutesValidator implements ConstraintValidator<ExerciseMin
 
     @Override
     public boolean isValid(Exercise value, ConstraintValidatorContext context) {
+        //not called from spring.
+        if(exerciseRepository == null)
+            return true;
+
         if(value != null && value.getGoal() != null){
             Long goalId = value.getGoal().getId();
             if(goalId != null && goalId > 0){

@@ -1,17 +1,41 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<t:page pageTitle="Say Hello">
+<t:page pageTitle="Say Hello" useJQuery="true">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <form method="post">
 
                 <div class="form-group">
                     <label for="txtName">Your name:</label>
-                    <input id="txtName" name="name" class="form-control" >
+                    <input id="txtName" name="name" class="form-control" data-ng-model="name" >
                 </div>
 
-                <button type="submit" class="btn btn-default">Ok</button>
+                <div id="txtNameEmpty" style="display: none;" class="alert alert-warning" role="alert">Please enter your name.</div>
+
+                <button id="btnSubmit" type="submit" class="btn btn-default">Ok</button>
             </form>
         </div>
 
     </div>
+
+    <script>
+        (function(){
+            var errorDiv = $("#txtNameEmpty");
+            errorDiv.css("display", "none");
+
+            var nameInput = $("#txtName");
+            $("#btnSubmit").click(function(event){
+                var name = nameInput.val();
+                if(!name){
+                    event.preventDefault();
+                    errorDiv.css("display", "block");
+                }
+            });
+
+            nameInput.keydown(function(){
+                errorDiv.css("display", "none");
+            });
+        })();
+
+
+    </script>
 </t:page>

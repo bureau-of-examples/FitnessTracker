@@ -3,37 +3,63 @@ package com.pluralsight.model;
 
 public class GoalReport {
 
-    private int goalMinutes;
-    private int exerciseMinutes;
-    private String exerciseActivity;
+    private Long goalId;
+    private String description;
+    private Integer goalMinutes;
+    private Long exerciseMinutes;
+    private Long numberOfActivities;
 
-    public GoalReport(int goalMinutes, int exerciseMinutes, String exerciseActivity) {
+    public GoalReport(long goalId, String description, Integer goalMinutes, Long exerciseMinutes, Long numberOfActivities) {
+        this.goalId = goalId;
+        this.description = description;
         this.goalMinutes = goalMinutes;
         this.exerciseMinutes = exerciseMinutes;
-        this.exerciseActivity = exerciseActivity;
+        this.numberOfActivities = numberOfActivities;
+
+        if(this.exerciseMinutes == null)
+            this.exerciseMinutes = 0L;
+
+        if(this.numberOfActivities == null)
+            this.numberOfActivities = 0L;
     }
 
-    public int getGoalMinutes() {
+    public Long getGoalId() {
+        return goalId;
+    }
+
+    public void setGoalId(Long goalId) {
+        this.goalId = goalId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Integer getGoalMinutes() {
         return goalMinutes;
     }
 
-    public void setGoalMinutes(int goalMinutes) {
+    public void setGoalMinutes(Integer goalMinutes) {
         this.goalMinutes = goalMinutes;
     }
 
-    public int getExerciseMinutes() {
+    public Long getExerciseMinutes() {
         return exerciseMinutes;
     }
 
-    public void setExerciseMinutes(int exerciseMinutes) {
+    public void setExerciseMinutes(Long exerciseMinutes) {
         this.exerciseMinutes = exerciseMinutes;
     }
 
-    public String getExerciseActivity() {
-        return exerciseActivity;
+    public Long getNumberOfActivities() {
+        return numberOfActivities;
     }
 
-    public void setExerciseActivity(String exerciseActivity) {
-        this.exerciseActivity = exerciseActivity;
+    public void setNumberOfActivities(Long numberOfActivities) {
+        this.numberOfActivities = numberOfActivities;
     }
 }

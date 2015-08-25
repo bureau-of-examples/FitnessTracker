@@ -4,22 +4,36 @@
 <t:page pageTitle="Goal Report">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="alert alert-success">
-                <h3>Goal Reports</h3>
 
-                <div class="row" style="font-weight: 400">
-                    <div class="col-md-1">Minutes</div>
-                    <div class="col-md-2">Exercise Minutes</div>
-                    <div class="col-md-9">Activity</div>
-                </div>
+            <table class="table table-striped table-hover">
+                <caption>Goal Reports</caption>
+                <thead>
+                <tr>
+                    <th>Goal</th>
+                    <th>Target</th>
+                    <th>Exercised</th>
+                    <th># Activities</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
                 <c:forEach items="${goalReports}" var="goalReport">
-                    <div class="row">
-                        <div class="col-md-1">${goalReport.goalMinutes}</div>
-                        <div class="col-md-2">${goalReport.exerciseMinutes}</div>
-                        <div class="col-md-9">${goalReport.exerciseActivity}</div>
-                    </div>
+                    <tr>
+                        <td>${goalReport.goalId} - ${goalReport.description}</td>
+                        <td>${goalReport.goalMinutes} minute(s)</td>
+                        <td>${goalReport.exerciseMinutes} minutes (s)</td>
+                        <td>${goalReport.numberOfActivities}</td>
+                        <td>
+                            <c:if test="${goalReport.exerciseMinutes == goalReport.goalMinutes}">
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </c:if>
+                        </td>
+                    </tr>
                 </c:forEach>
-            </div>
+                </tbody>
+
+            </table>
+
         </div>
     </div>
     <div class="row">

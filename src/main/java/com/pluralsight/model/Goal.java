@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Table(name="goals")
 @NamedQueries({
-        @NamedQuery(name = Goal.FIND_GOAL_REPORTS, query = "SELECT new com.pluralsight.model.GoalReport(g.minutes,e.minutes, e.activity) FROM Goal g, Exercise e WHERE g.id = e.goal.id")
+        @NamedQuery(name = Goal.FIND_GOAL_REPORTS, query = "SELECT new com.pluralsight.model.GoalReport(g.id, g.description, g.minutes, sum(e.minutes), count(e)) FROM Goal g left join g.exercises e")
 })
 public class Goal {
 
@@ -29,7 +29,7 @@ public class Goal {
     private String description;
 
     @OneToMany(mappedBy = "goal", cascade = CascadeType.ALL/*, fetch = FetchType.EAGER*/)
-    private List<Exercise> exercises = new ArrayList<Exercise>();
+    private List<Exercise> exercises = new ArrayList<>();
 
     public Goal(){
        setMinutes(10);

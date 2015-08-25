@@ -11,7 +11,8 @@
     <link rel="stylesheet" href='${pageContext.request.contextPath}/css/site.css'>
 
     <%if(Boolean.TRUE.equals(useJQuery)){%>
-        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
+        <script src="${pageContext.request.contextPath}/js/angular.js"></script>
     <%}%>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
