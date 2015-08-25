@@ -7,6 +7,7 @@ import com.pluralsight.repository.ExerciseRepository;
 import com.pluralsight.service.ExerciseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ValidationUtils;
@@ -51,7 +52,11 @@ public class MinutesController {
     @Resource(name = "exerciseRepository")
     private ExerciseRepository exerciseRepository;
 
+    @Resource(name = "validator")
+    private SpringValidatorAdapter validator;
+
     @RequestMapping(value = "/addMoreMinutes")
+    @Transactional
     public String addMoreMinutes(@ModelAttribute("exercise") Exercise exercise, Model model, HttpSession session, BindingResult bindingResult/*bindingResult is a set of validation errors */) {
         //model.addAttribute("controllerHash", this.hashCode());
         model.addAttribute("action", "Add More Minutes:");
@@ -65,9 +70,7 @@ public class MinutesController {
             exercise.setGoal(goal);
 
             //we validate this way because @Valid produced a 400 error on this forwarded action method.
-            ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-            Validator validator = factory.getValidator();
-            ValidationUtils.invokeValidator(new SpringValidatorAdapter(validator), exercise, bindingResult);//need to bridge across Bean validator and Spring validator and populate binding results.
+            ValidationUtils.invokeValidator(validator, exercise, bindingResult);//need to bridge across Bean validator and Spring validator and populate binding results.
             if (!bindingResult.hasErrors()) {
                 exerciseService.save(exercise);
                 model.addAttribute("actionResult", "Minutes saved.");

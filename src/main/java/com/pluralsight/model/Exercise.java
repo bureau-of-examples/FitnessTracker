@@ -1,5 +1,6 @@
 package com.pluralsight.model;
 
+import com.pluralsight.validation.ExerciseMinutesConstraint;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
+@ExerciseMinutesConstraint
 public class Exercise {
 
     @Id
