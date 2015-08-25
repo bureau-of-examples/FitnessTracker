@@ -19,20 +19,6 @@
 
                 <h3>Test pages</h3>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="well bg-info">
-                        <h3>Test pages</h3>
-
-                        <div class="btn-group-justified" role="group">
-                            <a class="btn btn-default" href="sayHello.html">Greeting</a>
-                            <a class="btn btn-default" href="params/.html">Params</a>
-                            <a class="btn btn-default" href="redirect/my_value.html">Redirect</a>
-                            <a class="btn btn-default" href="params/111;p=111;q=222/matrix.html">Matrix Variable</a>
-                            <a class="btn btn-default" href="lastModified.html">Last Modified</a>
-                            <a class="btn btn-default" href="cache.html">Cache</a>
-                        </div>
-                    </div>
                 <div class="btn-group-justified" role="group">
                     <a class="btn btn-default" href="sayHello.html">Greeting</a>
                     <a class="btn btn-default" href="params/.html">Params</a>
@@ -45,6 +31,7 @@
                     </sec:authorize>
                 </div>
             </div>
+
 
             <div class="row">
                 <div class="col-md-12">

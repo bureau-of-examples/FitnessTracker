@@ -1,7 +1,6 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<t:page pageTitle="Say Hello" useJQuery="true">
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
-<t:page pageTitle="Say Hello" useJQuery="true">
+<t:page pageTitle="Say Hello" useJavaScript="true">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <form method="post">

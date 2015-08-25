@@ -11,4 +11,18 @@
 
 footer{
     margin-top: 3em;
+    opacity: 0.8;
+    font-size: small;
+}
+
+section.main {
+    min-height: 20em;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.panel-collapse .panel-body {
+    display: none;
 }
