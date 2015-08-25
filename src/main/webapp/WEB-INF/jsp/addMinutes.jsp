@@ -13,7 +13,7 @@
 <t:page pageTitle="Add Minutes" useJQuery="true">
 
     <c:if test="${empty totalMinutes}">
-        <c:set var="totalMinutes" value="0" />
+        <c:set var="totalMinutes" value="0"/>
     </c:if>
 
     <script type="text/javascript">
@@ -49,28 +49,42 @@
     <div class="row">
         <div class="col-md-12">
             <form:form commandName="exercise">
-                <form:errors path="*" cssClass="errorblock" element="div"/>
-                <div class="row">
-                    <div class="col-md-2"><spring:message code="goal.text"/></div>
-                    <div class="col-md-2"><form:input path="minutes"/></div>
-                    <div class="col-md-8">
 
-                        <select id="activities" name="activity" value="${exercise.activity}">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label for="txtMinutes"><spring:message code="goal.text"/></label>
+                        <form:input id="txtMinutes" path="minutes" cssClass="form-control"/>
 
-                        </select>
+                        <label for="activities" class="sr-only">Activity</label>
+                        <select id="activities" name="activity" value="${exercise.activity}"
+                                class="form-control"></select>
+
+                        <input type="submit" value="Save" class="btn btn-default">
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4"><input type="submit" value="Save"></div>
-                    <div class="col-md-8"><span>${actionResult}</span></div>
-                </div>
+
+                <form:errors path="*" cssClass="errorblock" element="div"/>
             </form:form>
+            <br>
+            <br>
+
+            <c:if test="${not empty actionResult}">
+
+                <div class="alert alert-success" role="alert">
+                    ${actionResult}
+                </div>
+            </c:if>
+
         </div>
     </div>
     <div class="row">
-        <h3>Your goal is: ${goal.minutes} minutes.</h3>
-
-        <h3>You exercised ${totalMinutes} minutes.</h3>
-        <a href="../">Back to default page.</a>
+        <div class="col-md-12">
+            <div class="alert alert-info">
+                <p>Your goal is: <strong>${goal.minutes}</strong> minute(s).</p>
+                <p>You exercised <strong>${totalMinutes}</strong> minute(s).</p>
+            </div>
+            <br>
+            <a href="../">Back to default page.</a>
+        </div>
     </div>
 </t:page>

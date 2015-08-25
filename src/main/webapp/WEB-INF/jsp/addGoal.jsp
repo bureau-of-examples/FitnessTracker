@@ -60,6 +60,12 @@
             </form:form>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <a href="${pageContext.request.contextPath}/">Go back</a>
+        </div>
+    </div>
 </t:page>
 
 

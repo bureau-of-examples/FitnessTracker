@@ -27,33 +27,44 @@ public class GoalController {
     private GoalService goalService;
 
     public static final String CURRENT_GOAL_SESSION_KEY = "goal";
+    private static final String LAST_GOAL_SESSION_KEY = "!goal";
 
     @RequestMapping(value = "/updateGoal", method = {RequestMethod.GET})
-    public String updateGoal(Model model, @RequestParam(value = "create", required = false) Boolean create){
-        Goal goal = (Goal)session.getAttribute(CURRENT_GOAL_SESSION_KEY);
-        if(goal == null || Boolean.TRUE.equals(create)){
+    public String updateGoal(Model model, @RequestParam(value = "create", required = false) Boolean create, HttpSession session) {
+        Goal goal;
+        if (Boolean.TRUE.equals(create)) {
             goal = new Goal();
+        } else {
+            goal = (Goal) session.getAttribute(CURRENT_GOAL_SESSION_KEY);
+            //cannot update not saved.
+            if (goal == null || goal.getId() == null) {
+                //find the goal to update.
+                goal = (Goal)session.getAttribute(LAST_GOAL_SESSION_KEY);
+                if(goal == null)
+                    return "redirect:addGoal.html";
+            }
         }
         model.addAttribute(CURRENT_GOAL_SESSION_KEY, goal);
         return "addGoal";
     }
 
     @RequestMapping(value = "/addGoal", method = {RequestMethod.GET})
-    public String addGoal(Model model){
+    public String addGoal(Model model) {
 
         return "forward:updateGoal.html?create=true";
     }
 
     @RequestMapping(value = {"/addGoal", "/updateGoal"}, method = RequestMethod.POST)
-    public String addGoal(@Valid @ModelAttribute(CURRENT_GOAL_SESSION_KEY) Goal goal, BindingResult bindingResult){
-        if(!bindingResult.hasErrors()){
-            if("Reserved".equals(goal.getDescription()))
+    public String addGoal(@Valid @ModelAttribute(CURRENT_GOAL_SESSION_KEY) Goal goal, HttpSession session, BindingResult bindingResult) {
+        if (!bindingResult.hasErrors()) {
+            if ("Reserved".equals(goal.getDescription()))
                 throw new RuntimeException("Goal name cannot be 'Reserved.'");
 
             boolean updating = goal.getId() != null;
             goalService.save(goal);
+            session.setAttribute(LAST_GOAL_SESSION_KEY, goal);
 
-            if(updating)
+            if (updating)
                 return "redirect:addMoreMinutes.html";
             return "redirect:addMinutes.html";
         }
@@ -62,19 +73,22 @@ public class GoalController {
     }
 
     @RequestMapping(value = "/setGoal", method = RequestMethod.POST)
-    public @ResponseBody String setGoal(@RequestParam(value = "goalId", required = true) long goalId, Model model){
+    public
+    @ResponseBody
+    String setGoal(@RequestParam(value = "goalId", required = true) long goalId, Model model) {
 
         Goal goal = goalService.getGoal(goalId);
-        if(goal == null)
+        if (goal == null)
             throw new RuntimeException("Cannot find goal " + goalId);
 
         model.addAttribute(CURRENT_GOAL_SESSION_KEY, goal);
+        model.addAttribute(LAST_GOAL_SESSION_KEY, goal);
         return "success";
 
     }
 
     @RequestMapping(value = "/getGoals", method = RequestMethod.GET)
-    public String getGoals(Model model){
+    public String getGoals(Model model) {
         List<Goal> goals = goalService.getAllGoals();
         model.addAttribute("goals", goals);
         return "getGoals";
@@ -82,17 +96,16 @@ public class GoalController {
     }
 
     @RequestMapping(value = "/getGoalReports", method = RequestMethod.GET)
-    public String getGoalReports(Model model){
+    public String getGoalReports(Model model) {
         List<GoalReport> goalReports = goalService.findAllGoalReports();
         model.addAttribute("goalReports", goalReports);
         return "getGoalReports";
     }
 
     @InitBinder
-    public void initBinder(WebDataBinder binder){
+    public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(String.class, new StringTrimmerEditor(" -", true));
     }
-
 
 
 }

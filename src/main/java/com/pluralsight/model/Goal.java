@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Table(name="goals")
 @NamedQueries({
-        @NamedQuery(name = Goal.FIND_GOAL_REPORTS, query = "SELECT new com.pluralsight.model.GoalReport(g.id, g.description, g.minutes, sum(e.minutes), count(e)) FROM Goal g left join g.exercises e")
+        @NamedQuery(name = Goal.FIND_GOAL_REPORTS, query = "SELECT new com.pluralsight.model.GoalReport(g.id, g.description, g.minutes, sum(e.minutes), count(distinct e.activity)) FROM Goal g left join g.exercises e group by g.id, g.description, g.minutes")
 })
 public class Goal {
 
