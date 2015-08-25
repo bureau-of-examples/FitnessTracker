@@ -26,3 +26,18 @@ section.main {
 .panel-collapse .panel-body {
     display: none;
 }
+
+.well h4 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.logout-block span {
+    color: #4A7C59;
+    position:relative;
+    top:2px
+}
+
+.logout-block form {
+    display: inline-block;
+}

@@ -7,17 +7,24 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 
 <t:page pageTitle="You have successfully Logged out">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <h3>You have successfully logged out.</h3>
+            <div class="alert alert-info">
+                <h3><s:message code="fitnesstracker.logoutpage.header"/></h3>
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="${pageContext.request.contextPath}/">Go back</a>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <a href="${pageContext.request.contextPath}/">Go back</a>
-        </div>
-    </div>
+
 </t:page>
