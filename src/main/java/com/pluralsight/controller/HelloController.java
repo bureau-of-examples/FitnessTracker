@@ -118,4 +118,9 @@ public class HelloController implements ApplicationContextAware {
         return "cache";
     }
 
+    @RequestMapping(value = "index", method = RequestMethod.GET)
+    public String index(){
+        return "index";
+    }
+
 }

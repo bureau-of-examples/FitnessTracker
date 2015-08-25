@@ -5,6 +5,7 @@ import com.pluralsight.model.GoalReport;
 import com.pluralsight.service.GoalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -54,6 +55,7 @@ public class GoalController {
         return "forward:updateGoal.html?create=true";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') and hasPermission(#goal, 'create')")
     @RequestMapping(value = {"/addGoal", "/updateGoal"}, method = RequestMethod.POST)
     public String addGoal(@Valid @ModelAttribute(CURRENT_GOAL_SESSION_KEY) Goal goal, HttpSession session, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {

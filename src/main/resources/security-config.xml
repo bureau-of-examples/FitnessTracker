@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security.xsd
+        http://www.sprigframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <security:http auto-config="true" use-expressions="true">
+        <security:intercept-url pattern="/css/**" access="permitAll()"  />
+        <security:intercept-url pattern="/js/**" access="permitAll()" />
+        <security:intercept-url pattern="/favicon.ico" access="permitAll()" />
+        <security:intercept-url pattern="/login.html" access="permitAll()"  /><!--requires-channel="https"  will redirect http://.... to https://....-->
+        <security:intercept-url pattern="/loginFailed.html" access="permitAll()" /> <!--requires-channel="https" -->
+        <security:intercept-url pattern="/loggedOut.html" access="permitAll()" />
+        <security:intercept-url pattern="/403.html" access="permitAll()" />
+        <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')" /><!--tthis has to be the last one-->
+        <!--<security:http-basic />-->
+        <security:form-login login-page="/login.html" authentication-failure-url="/loginFailed.html" login-processing-url="/j_spring_security_check.html" username-parameter="j_username" password-parameter="j_password" />
+        <security:logout logout-success-url="/loggedOut.html" logout-url="/logout.html" invalidate-session="true" />
+        <security:access-denied-handler error-page="/403.html" />
+    </security:http>
+
+    <security:authentication-manager>
+
+        <security:authentication-provider user-service-ref="userDetailsService">
+            <security:password-encoder hash="bcrypt" /><!--hash="md5"-->
+            <!--xml based users
+            <security:user-service>
+                <security:user name="zhy2002" password="zhy2002" authorities="ROLE_USER" />
+            </security:user-service>
+            -->
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+    <bean id="userDetailsService" class="com.pluralsight.service.UserDetailsServiceImpl" />
+</beans>

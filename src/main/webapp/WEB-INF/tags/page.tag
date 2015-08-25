@@ -22,12 +22,18 @@
 <div class="container">
 
     <div class="page-header">
-        <h2>Fitness Tracker <small>Spring + JPA demo webapp</small></h2>
+        <h2>Fitness Tracker <small>Spring MVC3 + JPA demo webapp</small></h2>
     </div>
 
     <jsp:doBody/>
 
-    <footer></footer>
+    <footer><hr>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                Spring MVC3 + JPA demo webapp; source code: <a href="https://github.com/zhy2002/FitnessTracker">https://github.com/zhy2002/FitnessTracker</a>
+            </div>
+        </div>
+    </footer>
 </div>
 </body>
 </html>
