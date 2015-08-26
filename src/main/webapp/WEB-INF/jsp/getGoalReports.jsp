@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <t:page pageTitle="Goal Report">
     <div class="row">
@@ -31,6 +32,14 @@
                         </td>
                     </tr>
                 </c:forEach>
+
+                <c:if test="${fn:length(goalReports) eq 0}">
+                    <tr>
+                        <td colspan="5">
+                            <p>No goal found. </p>
+                        </td>
+                    </tr>
+                </c:if>
                 </tbody>
 
             </table>

@@ -8,13 +8,14 @@
         <div class="col-md-8 col-md-offset-2">
 
             <form:form commandName="goal">
-                <form:errors path="*" cssClass="errorblock" element="div"/>
+
+                <form:errors path="*" cssClass="alert alert-warning" element="div"/>
 
                 <div class="row">
                     <label class="col-md-3 control-label">Id:</label>
 
                     <div class="col-md-9 form-group">
-                        <p class="form-control-static">${goal.id}</p>
+                        <p class="form-control-static">${goal.id == null ? "N/A" : goal.id}</p>
                     </div>
                 </div>
 
@@ -25,13 +26,9 @@
 
                     <div class="col-md-9 form-group">
                         <form:input id="minutes" path="minutes"  cssClass="form-control" />
-                    </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
                         <form:errors path="minutes" cssClass="help-block error"/>
                     </div>
+
                 </div>
 
                 <div class="row">
@@ -41,14 +38,9 @@
 
                     <div class="col-md-9 form-group">
                         <form:input id="description" path="description" cssClass="form-control" />
-                    </div>
-
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
                         <form:errors path="description" cssClass="help-block error"/>
                     </div>
+
                 </div>
 
                 <div class="row">

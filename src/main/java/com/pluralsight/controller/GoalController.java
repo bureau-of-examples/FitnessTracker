@@ -5,14 +5,11 @@ import com.pluralsight.model.GoalReport;
 import com.pluralsight.service.GoalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
@@ -20,9 +17,6 @@ import java.util.List;
 @Controller
 @SessionAttributes("goal")
 public class GoalController {
-
-    @Autowired
-    private HttpSession session;
 
     @Autowired
     private GoalService goalService;
@@ -55,9 +49,9 @@ public class GoalController {
         return "forward:updateGoal.html?create=true";
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') and hasPermission(#goal, 'create')")
+    //@PreAuthorize("hasRole('ROLE_ADMIN') and hasPermission(#goal, 'create')")
     @RequestMapping(value = {"/addGoal", "/updateGoal"}, method = RequestMethod.POST)
-    public String addGoal(@Valid @ModelAttribute(CURRENT_GOAL_SESSION_KEY) Goal goal, HttpSession session, BindingResult bindingResult) {
+    public String addGoal(@Valid @ModelAttribute(CURRENT_GOAL_SESSION_KEY) Goal goal, BindingResult bindingResult, HttpSession session) {
         if (!bindingResult.hasErrors()) {
             if ("Reserved".equals(goal.getDescription()))
                 throw new RuntimeException("Goal name cannot be 'Reserved.'");

@@ -3,26 +3,35 @@
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 
-<s:message var="appName" code="project.appname" />
+<s:message var="appName" code="project.appname"/>
 <t:page pageTitle="${appName}">
 
-    <div class="row" >
+    <div class="row">
 
         <div class="col-md-12">
 
+
             <div class="pull-right logout-block">
-                <c:url var="logoutUrl" value="/logout.html"/>
-                <span>Welcome <sec:authentication property="name"/>!</span>
-                <form action="${logoutUrl}" method="post">
-                    <input type="submit" value="Logout" class="btn btn-sm btn-warning "/>
-                    <sec:csrfInput/>
-                </form>
+                <div>
+                    <span> Language: <a href="?language=en">English</a> | <a href="?language=es">Spanish</a> </span>
+                </div>
+
+                <div>
+                    <c:url var="logoutUrl" value="/logout.html"/>
+                    <span>Welcome <a href="user.html"><sec:authentication property="name"/></a>!</span>
+
+                    <form action="${logoutUrl}" method="post">
+                        <input type="submit" value="Logout" class="btn btn-sm btn-warning "/>
+                        <sec:csrfInput/>
+                    </form>
+                </div>
             </div>
 
             <div class="row">
                 <div class="col-md-12">
-                    <h3><s:message code="fitnesstracker.index.header" /></h3>
+                    <h3><s:message code="fitnesstracker.index.header"/></h3>
                     <br>
+
                     <div class="row app-options">
                         <div class="col-md-3"><a href="addGoal.html" class="btn btn-default">Add Goal</a></div>
                         <div class="col-md-3"><a href="updateGoal.html" class="btn btn-default">Update Goal</a></div>
@@ -39,6 +48,7 @@
 
                 <h4>Test pages</h4>
                 <br>
+
                 <div class="btn-group-justified" role="group">
                     <a class="btn btn-default" href="sayHello.html">Greeting</a>
                     <a class="btn btn-default" href="params/.html">Params</a>

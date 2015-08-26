@@ -36,10 +36,6 @@
     </script>
 
     <div class="row">
-        <div class="col-md-offset-8 col-md-4"> Language: <a href="?language=en">English</a> | <a href="?language=es">Spanish</a>
-        </div>
-    </div>
-    <div class="row">
             <%--<div class="col-md-8">${controllerHash}</div>--%>
         <div class="col-md-12">
             <h4>${action} <span>${goal.id} - ${goal.description}</span></h4>

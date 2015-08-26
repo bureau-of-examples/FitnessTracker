@@ -38,6 +38,10 @@ section.main {
     top:2px
 }
 
+.logout-block div{
+   margin-top: 0.2em;
+}
+
 .logout-block form {
     display: inline-block;
 }
@@ -58,4 +62,9 @@ div.app-options .btn {
 
 #predefined_users_panel{
     min-width: 650px;
+}
+
+.form-inline .form-control{
+    margin-top: 0.5em;
+    margin-bottom:0.5em;
 }
