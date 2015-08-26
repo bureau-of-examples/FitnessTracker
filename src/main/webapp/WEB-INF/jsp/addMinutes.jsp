@@ -83,8 +83,8 @@
                 <p>Your goal is: <strong>${goal.minutes}</strong> minute(s).</p>
                 <p>You exercised <strong>${totalMinutes}</strong> minute(s).</p>
             </div>
-            <br>
-            <a href="../">Back to default page.</a>
         </div>
     </div>
+
+    <t:gobackLink text="Back to main page" />
 </t:page>

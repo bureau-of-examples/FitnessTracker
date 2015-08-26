@@ -20,7 +20,7 @@
 
             <form action="j_spring_security_check.html" name="f" method="post" class="form-horizontal">
                 <div class="form-group">
-                    <label for="txtUsername" class="col-sm-2 control-label">Username:</label>
+                    <label for="txtUsername" class="col-md-2 control-label">Username:</label>
 
                     <div class="col-md-10">
                         <input id="txtUsername" name="j_username" autofocus="autofocus" class="form-control">
@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="txtPassword" class="col-sm-2 control-label">Password:</label>
+                    <label for="txtPassword" class="col-md-2 control-label">Password:</label>
 
                     <div class="col-md-10">
                         <input id="txtPassword" name="j_password" type="password" class="form-control">
@@ -47,13 +47,13 @@
 
             <hr>
 
-            <div class="panel panel-default panel-accordion">
+            <div id="predefined_users_panel" class="panel panel-default panel-accordion">
                 <div class="panel-heading">
                     <h3 class="panel-title"><s:message code="predefinedusers" />
                         <span class="caret"></span></h3>
                 </div>
                 <div class="panel-body">
-                    <table class="table table-striped">
+                    <table id="predefined_users_table" class="table table-striped">
                         <thead>
                             <tr><th>Username</th><th>Password Hash</th></tr>
                         </thead>

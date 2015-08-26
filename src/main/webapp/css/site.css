@@ -41,3 +41,21 @@ section.main {
 .logout-block form {
     display: inline-block;
 }
+
+
+div.app-options .btn {
+    width: 100%;
+    margin-top:0.5em;
+}
+
+.go-back-link{
+    margin-top: 2em;
+}
+
+#predefined_users_table{
+    min-width: 625px;
+}
+
+#predefined_users_panel{
+    min-width: 650px;
+}

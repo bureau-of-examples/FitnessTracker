@@ -16,13 +16,7 @@
                 <h3><s:message code="fitnesstracker.logoutpage.header"/></h3>
             </div>
 
-            <br>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <a href="${pageContext.request.contextPath}/">Go back</a>
-                </div>
-            </div>
+            <t:gobackLink />
         </div>
     </div>
 

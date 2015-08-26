@@ -21,6 +21,8 @@
 
     </div>
 
+    <t:gobackLink />
+
     <script>
         (function(){
             var errorDiv = $("#txtNameEmpty");

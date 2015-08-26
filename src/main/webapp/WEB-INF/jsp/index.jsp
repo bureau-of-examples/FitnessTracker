@@ -23,7 +23,7 @@
                 <div class="col-md-12">
                     <h3><s:message code="fitnesstracker.index.header" /></h3>
                     <br>
-                    <div class="row">
+                    <div class="row app-options">
                         <div class="col-md-3"><a href="addGoal.html" class="btn btn-default">Add Goal</a></div>
                         <div class="col-md-3"><a href="updateGoal.html" class="btn btn-default">Update Goal</a></div>
                         <div class="col-md-3"><a href="getGoals.html" class="btn btn-default">Get Goals</a></div>

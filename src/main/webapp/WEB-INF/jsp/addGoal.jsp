@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <t:page pageTitle="Add Goal">
 
@@ -56,16 +57,14 @@
                     </div>
                 </div>
 
-
+                <sec:csrfInput />
             </form:form>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <a href="${pageContext.request.contextPath}/">Go back</a>
-        </div>
-    </div>
+
+    <t:gobackLink />
+
 </t:page>
 
 
