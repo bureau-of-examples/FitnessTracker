@@ -1,13 +1,18 @@
 <%@tag trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ attribute name="pageTitle" required="false" %>
 <%@ attribute name="useJavaScript" required="false" type="java.lang.Boolean" %>
+<%@ attribute name="useAjax" required="false" type="java.lang.Boolean" %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <c:if test="${useAjax}" >
+        <security:csrfMetaTags/>
+    </c:if>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}css/bootstrap-theme.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/site.css">

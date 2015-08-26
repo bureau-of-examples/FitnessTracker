@@ -44,7 +44,7 @@ public class GoalController {
     }
 
     @RequestMapping(value = "/addGoal", method = {RequestMethod.GET})
-    public String addGoal(Model model) {
+    public String addGoal() {
 
         return "forward:updateGoal.html?create=true";
     }
@@ -84,11 +84,17 @@ public class GoalController {
     }
 
     @RequestMapping(value = "/getGoals", method = RequestMethod.GET)
-    public String getGoals(Model model) {
+    public String getGoals(Model model, HttpSession session) {
         List<Goal> goals = goalService.getAllGoals();
         model.addAttribute("goals", goals);
-        return "getGoals";
 
+        Goal lastGoal = (Goal)session.getAttribute(LAST_GOAL_SESSION_KEY);
+        Long lastGoalId = 0L;
+        if(lastGoal != null){
+            lastGoalId = lastGoal.getId();
+        }
+        model.addAttribute("currentGoalId", lastGoalId);
+        return "getGoals";
     }
 
     @RequestMapping(value = "/getGoalReports", method = RequestMethod.GET)
