@@ -80,3 +80,11 @@ div.app-options .btn {
 .row.not-default .selected {
     display: none;
 }
+
+span.tag{
+    color:#5Ba884;
+    font-size:small;
+    font-weight:bold;
+    display:inline-block;
+    padding-right: 1em;
+}

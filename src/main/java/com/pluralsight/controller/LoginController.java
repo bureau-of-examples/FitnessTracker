@@ -1,11 +1,14 @@
 package com.pluralsight.controller;
 
+import com.pluralsight.model.security.User;
 import com.pluralsight.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.security.Principal;
 
 @Controller
 public class LoginController {
@@ -37,6 +40,16 @@ public class LoginController {
     public String notAuthorized(){
 
         return "403";
+    }
+
+    @RequestMapping(value = "user", method = RequestMethod.GET)
+    public String showUser(Model model, Principal principal){
+
+        String username = principal.getName();
+        User currentUser = userService.findUser(username);
+        model.addAttribute("user", currentUser);
+
+        return "user";
     }
 
 
