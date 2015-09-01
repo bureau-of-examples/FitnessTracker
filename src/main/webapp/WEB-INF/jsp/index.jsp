@@ -60,6 +60,9 @@
                         <a class="btn btn-default" href="javascript:void(0)">Admin</a>
                     </sec:authorize>
                 </div>
+
+                <br>
+                <a href="pdf/test1.pdf">Exposing file in WEB-INF</a>
             </div>
 
         </div>

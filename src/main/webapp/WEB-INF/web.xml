@@ -24,12 +24,12 @@
 
     <servlet-mapping>
         <servlet-name>ft_servlet</servlet-name>
-        <url-pattern>/pdf/**</url-pattern>
+        <url-pattern>/pdf/*</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>ft_servlet</servlet-name>
-        <url-pattern>/params/**</url-pattern>
+        <url-pattern>/params/*</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>

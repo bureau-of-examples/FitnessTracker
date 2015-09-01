@@ -71,7 +71,7 @@
 
     <!--if request maps this url pattern then use the static files at these locations as response-->
     <!--pdf files in WEB-INF folder won't be served-->
-    <mvc:resources mapping="/pdf/**" location="/WEB-INF/pdf/,/pdf/" />
+    <mvc:resources mapping="/**" location="/WEB-INF/pdf/" />
 
     <!--The bean required to make spring message tag work. The message tag is used for i18n.-->
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
