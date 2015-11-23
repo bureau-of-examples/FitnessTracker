@@ -10,6 +10,7 @@
 
     <properties>
         <version-spring-security>4.0.1.RELEASE</version-spring-security>
+        <skipITs>true</skipITs>
     </properties>
 
     <dependencyManagement>
@@ -25,14 +26,6 @@
     </dependencyManagement>
 
     <dependencies>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
-
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -136,7 +129,6 @@
         </dependency>
 
 
-
         <!--spring security dependencies-->
         <dependency>
             <groupId>org.springframework.security</groupId>
@@ -170,6 +162,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.1</version>
             </plugin>
 
             <plugin>
@@ -179,6 +172,33 @@
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.19</version>
+                <executions>
+                    <execution>
+                        <id>integration-test</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>verify</id>
+                        <goals>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+
+                    <includes>
+                        <include>**/IntegrationTest*.java</include>
+                    </includes>
+                    <skipITs>${skipITs}</skipITs>
                 </configuration>
             </plugin>
         </plugins>
